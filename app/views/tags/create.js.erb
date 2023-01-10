@@ -1,0 +1,14 @@
+// modalを閉じる処理
+$("#tagModal").modal("hide");
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+
+// Rails @status => true 画面の書き換え : false モーダルを再度表示
+<% if @status %>
+$("#tagsIndex").append("<%= j(render @tag) %>");
+
+<% else %>
+$("#modalArea").html("<%= j(render 'tag/form', tag: @tag) %>")
+$("#modalArea").find(".modal").modal('show')
+<% end %>
