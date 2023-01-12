@@ -1,9 +1,10 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_tag, only: %i[show edit update destroy]
 
   # GET /tags
   def index
-    @tags = Tag.all
+    @tags = current_user.tags.all
   end
 
   # GET /tags/1
@@ -12,7 +13,7 @@ class TagsController < ApplicationController
 
   # GET /tags/new
   def new
-    @tag = Tag.new
+    @tag = current_user.tags.new
   end
 
   # GET /tags/1/edit
@@ -21,12 +22,12 @@ class TagsController < ApplicationController
 
   # POST /tags
   def create
-    @tag = Tag.new(tag_params)
+    @tag = current_user.tags.new(tag_params)
 
     if @tag.save
       @status = true
     else
-      @status = false
+      @stauts = false
     end
   end
 
@@ -35,7 +36,7 @@ class TagsController < ApplicationController
     if @tag.update(tag_params)
       @status = true
     else
-      @status = false
+      @stauts = false
     end
   end
 
@@ -47,11 +48,11 @@ class TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      @tag = Tag.find(params[:id])
+      @tag = current_user.tags.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def tag_params
-      params.require(:tag).permit(:name)
+      params.require(:tag).permit(:name, :user_id)
     end
 end

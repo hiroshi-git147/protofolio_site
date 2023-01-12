@@ -1,7 +1,5 @@
 // モーダル追加
-$("#modalArea").html(
-  "<%= j(render 'form', tag: @tag) %>"
-);
+$("#modalArea").html("<%= j(render 'edit_form', tag: @tag) %>");
 
 // フォームにフォーカス
 //modalAreaのなかから modalを探してきて、
@@ -11,4 +9,6 @@ $("#modalArea").find(".modal").on('shown.bs.modal', () => {
 
 // モーダル表示
 $("#modalArea").find(".modal").modal("show");
+
+
 
