@@ -1,24 +1,13 @@
-# README
+架空の攻略サイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+大部分で作ってるサイトの一つで大まかな機能としては
 
-Things you may want to cover:
+機能一覧
+・投稿機能     //完了
+・ログイン　　//完了
+・管理者機能　　//完了
+・タグ機能
+・コメント機能　
+・検索機能
+・いいね機能
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
