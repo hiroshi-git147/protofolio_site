@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
-  before_action :if_not_admin
-  before_action :set_post, only: %i[edit update destroy]
+  before_action :authenticate_user!
+  before_action :set_post, only: %i[show edit update destroy]
   
   # GET /posts
   def index
@@ -10,6 +10,9 @@ class Admin::PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+  end
+  
+  def show
   end
 
   # GET /posts/1/edit
@@ -21,18 +24,20 @@ class Admin::PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to admin_posts_path, notice: 'Post was successfully created.'
     else
-      render :new
+      redirect_to new_admin_post_path
     end
   end
 
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
+      @post.updated_at = Time.now
+      @post.update!(post_params)
       redirect_to admin_posts_path, notice: 'Post was successfully updated.'
     else
-      render :edit
+      redirect_to edit_admin_post_path
     end
   end
 
@@ -43,9 +48,6 @@ class Admin::PostsController < ApplicationController
   end
 
   private
-  def if_not_admin
-    redirect_to root_path unless current_user.admin?
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
