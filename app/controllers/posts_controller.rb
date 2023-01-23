@@ -7,9 +7,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.order(created_at: :desc)
+    @comment = current_user.comments.new
   end
-
-  
 
   private
     # Only allow a trusted parameter "white list" through.

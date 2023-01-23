@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  resources :posts, only: :show
+  resources :posts, only: :show do
+    resources :comments, only: %i[create edit update destroy]
+  end
   namespace :admin do
     resources :posts
   end
