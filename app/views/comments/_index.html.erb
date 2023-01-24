@@ -1,5 +1,7 @@
 <% comments.each do |comment| %>
-  <tr>
-    <td><%= comment.coment_content %></td>
-  </tr>
+  <div class="card-body">
+    <p class = "comment-name"><%= comment.user.name %></p> | <span class = "update-stamp"><%= l comment.updated_at, format: :short%></span>
+    <p><%= comment.comment_content %></p>
+  </div>
+  <hr>
 <% end %>

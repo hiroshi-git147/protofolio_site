@@ -5,43 +5,26 @@
     <p class = "update-stamp"><%= l @post.updated_at, format: :short%></p>
     <p class="card-text"><%= @post.content.html_safe %></p>
   </div>
-</div>
-
-
-
-
-<div>
-  <h3>コメント一覧</h3>
-  <p>コメント:<%= @comments.size %>件</p>
-  <table class="table table-striped">
+  <hr>
+  <div class="card-body">
+    <h3>コメント<span><%= @comments.size %>件</span></h3>
     <% if @comments.any? %>
-      <thead class = "thead-light">
-        <tr>
-          <td>コメント</td>
-        </tr>
-      </thead>
-      <tbody>
-        <div id = "comment_area" >
-          <% @comments.each do |comment| %>
-            <tr>
-              <td><%= comment.coment_content %></td>
-            </tr>
-          <% end %>
-        </div>
-      </tbody>
-
+      <%= render partial: 'comments/index', locals: { comments: @comments } %>
     <% else %>
       <p>コメントはまだありません。</p>
     <% end %>
-  </table>
+    
+  </div>
+  
 </div>
 
 
+
 <%= form_with model: [@post, @comment], remote: true do |f| %>
-  <%= f.hidden_field :post_id, value: @post.id  %>
+  <%= f.hidden_field :post_id, value: @post.id %>
   <div class="form-group">
-    <%= f.label :coment_content %>
-    <%= f.text_area :coment_content, class: "form-control" %>
+    <%= f.label :comment_content, "コメントを書く" %>
+    <%= f.text_area :comment_content, class: "form-control" %>
   </div>
   
   <div class="actions text-center">
