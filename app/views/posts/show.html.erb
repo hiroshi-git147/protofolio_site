@@ -2,7 +2,11 @@
 <div class="card mb-3">
   <div class="card-body">
     <h5 class="card-title"><%= @post.title %></h5>
-    <p class = "update-stamp"><%= l @post.updated_at, format: :short%></p>
+    <div class = "title-information">
+      <p class = "update-stamp"><%= l @post.updated_at, format: :short%></p>
+      <%= render partial: 'favorites/index', locals: { post: @post } %>
+    </div>
+    <hr>
     <p class="card-text"><%= @post.content.html_safe %></p>
   </div>
   <hr>

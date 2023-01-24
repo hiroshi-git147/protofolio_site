@@ -6,4 +6,8 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :post_tags
    has_many :comments, dependent: :destroy
    has_many :favorites, dependent: :destroy
+   
+  def favorited?(user)
+     favorites.where(user_id: user.id).exists?
+  end
 end

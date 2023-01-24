@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <% if post.favorited?(current_user) %>
+   
+    <%= link_to post_favorites_path(post.id), method: :delete do %>
+      <i class="fa fa-heart" style = "color: red;"></i>
+    <% end %>
+  <% else %>
+    
+    <%= link_to post_favorites_path(post.id), method: :post do %>
+      <i class="fa fa-heart"></i>
+    <% end %>
+  <% end %>
+  <span> <%= post.favorites.count %></span>
+  
+<% end %>

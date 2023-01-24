@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+  get 'favorites/destroy'
   root 'posts#index'
   resources :posts, only: :show do
     resources :comments, only: %i[create edit update destroy]
