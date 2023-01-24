@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   resources :posts, only: :show do
     resources :comments, only: %i[create edit update destroy]
+    resource :favorites, only: [:create, :destroy]
   end
   namespace :admin do
     resources :posts
